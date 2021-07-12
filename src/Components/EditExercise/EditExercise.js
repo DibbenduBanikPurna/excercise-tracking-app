@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 const EditExercise = () => {
-    const [exercise,setExercise]=useState({})
+    //const [exercise,setExercise]=useState({})
 
     const history=useHistory();
     const [singleExercise,setSingleExercise]=useState({})
@@ -19,10 +19,9 @@ const EditExercise = () => {
     },[id])
 
     const handleBlur=(e)=>{
-        const newExercise={...exercise,
-            [e.target.name]:e.target.value
-        }
-        setExercise(newExercise)
+        const newExercise={...singleExercise,[e.target.name]:e.target.value}
+        
+      setSingleExercise(newExercise)
     }
 
     const handleSubmit=(e)=>{
@@ -30,7 +29,7 @@ const EditExercise = () => {
         fetch(`http://localhost:5000/exercise/${id}`,{
             method:'PUT',
             headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(exercise)
+        body: JSON.stringify(singleExercise)
         })
         
         history.push('/')
